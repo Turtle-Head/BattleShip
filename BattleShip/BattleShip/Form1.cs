@@ -221,25 +221,35 @@ namespace BattleShip
             return (false);
         }
 
+        private void playerShipHit(int xAttack, int yAttack)
+        {
+            player[xAttack, yAttack].ImageLocation = @"..\net6.0-windows\hit.png";
+            comHitCount++;
+            MessageBox.Show("Computer sunk my Battleship!");
+            WinCheck();
+        }
         private void ComputerTurn()
         {
             Random rand = new Random();
             int xAttack = rand.Next(10);
             int yAttack = rand.Next(10);
+            List<int> playerList = playerLocations.ToList();
             MessageBox.Show("Computer Attacks " + xAttack.ToString());
-            if (player[xAttack, yAttack].ImageLocation == @"..\net6.0-windows\boat.png")
+            if (player[xAttack, yAttack] == player[playerList[0], playerList[1]])
             {
-                player[xAttack, yAttack].ImageLocation = @"..\net6.0-windows\hit.png";
-                comHitCount++;
-                MessageBox.Show("Computer sunk my Battleship!");
-                WinCheck();
+                playerShipHit(xAttack, yAttack);
             }
-            else if (player[xAttack, yAttack].ImageLocation == @"..\net6.0-windows\boat2.png")
+            else if (player[xAttack, yAttack] == player[playerList[2], playerList[3]])
             {
-                player[xAttack, yAttack].ImageLocation = @"..\net6.0-windows\hit.png";
-                comHitCount++;
-                MessageBox.Show("Computer sunk my Battleship!");
-                WinCheck();
+                playerShipHit(xAttack, yAttack);
+            }
+            else if (player[xAttack, yAttack] == player[playerList[4], playerList[5]])
+            {
+                playerShipHit(xAttack, yAttack);
+            }
+            else if (player[xAttack, yAttack] == player[playerList[6], playerList[7]])
+            {
+                playerShipHit(xAttack, yAttack);
             }
             else if
                 (player[xAttack, yAttack].ImageLocation == @"..\net6.0-windows\water.jpg")
